@@ -4,6 +4,7 @@
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Finance_Tracker" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/HelloApp" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/app/naychka2" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/git-hub-for-test" vcs="Git" />
   </component>
 </project>
