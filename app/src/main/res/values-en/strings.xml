@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HealthApp</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name = "btnSwitch">Change language</string>
+    <string name = "btnBack">Back</string>
+    <string name = "btnSave">Save</string>
+    <string name = "btnAddResearch">Add Research</string>
+    <string name = "btnAddphoto">Add a photo</string>
+
+    <string name = "AddButtonCard">Create card</string>
+    <string name = "PacientCard">Patient cards</string>
+
+    <string name = "cards">Card index</string>
+    <string name = "camera">Camera</string>
+    <string name = "processing">Processing</string>
+    <string name = "settings">Settings</string>
+
+    <string name = "doPicture">Take a photo</string>
+    <string name = "filterCheck">Filter</string>
+    <string name = "filterSelect">Select a filter</string>
+
+
+
+    <string name="additional_info_title">Additional information</string>
+    <string name="additional_info_hint">Optional field</string>
+
+    <string name="btn_back">Back</string>
+    <string name="btn_save">Save</string>
+
+    <string name="field_name">Name</string>
+    <string name="field_name_hint">Enter name</string>
+
+    <string name="field_lastname">Surname</string>
+    <string name="field_lastname_hint">Enter surname</string>
+
+    <string name="field_middlename">Middle name</string>
+    <string name="field_middlename_hint">Enter middle name</string>
+
+    <string name="field_birthdate">Birth date: %1$s</string>
+    <string name="field_birthdate2">Birth date</string>
+    <string name="field_dateResearch">Date of study: %1$s</string>
+
+    <string name="field_create_date">Created: %1$s</string>
+
+    <string name="field_pacient">Pacient</string>
+
+
+
+    <string name="field_name_Research">Enter the title of the study</string>
+    <string name="field_data_patient">Enter patient information</string>
+
+</resources>

@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">HealthApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name = "btnSwitch">Сменить язык</string>
+    <string name = "btnBack">Назад</string>
+    <string name = "btnSave">Сохранить</string>
+    <string name = "btnAddResearch">Добавить Исследование</string>
+    <string name = "btnAddphoto">Добавить фото</string>
+
+
+    <string name = "AddButtonCard">Создать карточку</string>
+    <string name = "PacientCard">Карточки пациентов</string>
+
+    <string name = "cards">Картотека</string>
+    <string name = "camera">Камера</string>
+    <string name = "processing">Обработка</string>
+    <string name = "settings">Настройки</string>
+
+    <string name = "doPicture">Сделайте снимок</string>
+    <string name = "filterCheck">Фильтр</string>
+    <string name = "filterSelect">Веберите фильтр</string>
+
+    <string name="additional_info_title">Доп. информация</string>
+    <string name="additional_info_hint">Не обязательно к заполнению</string>
+
+    <string name="btn_back">Назад</string>
+    <string name="btn_save">Сохранить</string>
+
+    <string name="field_name">Имя</string>
+    <string name="field_name_hint">Введите имя</string>
+
+    <string name="field_lastname">Фамилия</string>
+    <string name="field_lastname_hint">Введите фамилию</string>
+
+    <string name="field_middlename">Отчество</string>
+    <string name="field_middlename_hint">Введите отчество</string>
+
+    <string name="field_birthdate">Дата рождения: %1$s</string>
+    <string name="field_birthdate2">Дата рождения</string>
+    <string name="field_dateResearch">Дата исследования: %1$s</string>
+
+    <string name="field_create_date">Создано: %1$s</string>
+
+    <string name="field_pacient">Пациент</string>
+
+
+    <string name="field_name_Research">Введите название исследования</string>
+    <string name="field_data_patient">Введите данные о пациенте</string>
+
+
+</resources>

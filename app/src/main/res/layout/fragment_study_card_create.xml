@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".study.study_card_create">
+
+    <!-- Кнопка Назад -->
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:text="@string/btn_back"
+        android:textColor="@android:color/white"
+        android:backgroundTint="#5CBDD3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <!-- Кнопка Сохранить -->
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:text="@string/btn_save"
+        android:textColor="@android:color/white"
+        android:backgroundTint="#4CAF50"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Поле для названия -->
+    <EditText
+        android:id="@+id/etTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/field_name_Research"
+        android:padding="12dp"
+        android:inputType="text"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/btnBack"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+
+    <!-- Большое текстовое поле для данных о пациенте -->
+    <EditText
+        android:id="@+id/etPatientData"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:hint="@string/field_data_patient"
+        android:gravity="start|top"
+        android:padding="12dp"
+        android:scrollbars="vertical"
+        android:inputType="textMultiLine"
+        android:overScrollMode="always"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/etTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/imagePatient"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"/>
+
+
+    <com.github.chrisbanes.photoview.PhotoView
+        android:id="@+id/imagePatient"
+        android:layout_width="0dp"
+        android:background="#FFFFFF"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toBottomOf="@id/etPatientData"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Кнопка Добавить фото -->
+    <Button
+        android:id="@+id/btnAddPhoto"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:text="@string/btnAddphoto"
+        android:textColor="@android:color/white"
+        android:backgroundTint="#FF9800"
+        app:layout_constraintTop_toBottomOf="@id/imagePatient"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

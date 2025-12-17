@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="com.example.healthapp.Pacients.PatientCardsFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNav"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/bottomNav"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        android:padding="7dp"
+        android:background="#FF9B42"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentContainerView">
+
+        <Button
+            android:id="@+id/btnCrds"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:padding="0dp"
+            android:backgroundTint="#5CBDD3"
+            android:singleLine="true"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/white"
+            android:text="@string/cards" />
+
+        <Button
+            android:id="@+id/btcCamera"
+            android:textColor="@color/white"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:padding="0dp"
+            android:singleLine="true"
+            android:backgroundTint="#5CBDD3"
+            android:text="@string/camera" />
+
+        <Button
+            android:id="@+id/btnEditGallery"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:padding="0dp"
+            android:backgroundTint="#5CBDD3"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:text="@string/processing" />
+
+        <Button
+            android:id="@+id/btnSettings"
+            android:textColor="@color/white"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:padding="0dp"
+            android:backgroundTint="#5CBDD3"
+            android:layout_marginLeft="10dp"
+            android:singleLine="true"
+            android:text="@string/settings" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
