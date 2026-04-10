@@ -39,6 +39,7 @@
         android:padding="12dp"
         android:inputType="text"
         android:textSize="16sp"
+        android:background="@drawable/edittext_bg"
         app:layout_constraintTop_toBottomOf="@id/btnBack"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,25 +57,29 @@
         android:scrollbars="vertical"
         android:inputType="textMultiLine"
         android:overScrollMode="always"
+        android:background="@drawable/edittext_bg"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/etTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/imagePatient"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp"
+        app:layout_constraintVertical_weight="1"/>
 
 
     <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/imagePatient"
         android:layout_width="0dp"
         android:background="#FFFFFF"
-        android:layout_height="200dp"
+        android:layout_height="0dp"
         android:scaleType="centerCrop"
         app:layout_constraintTop_toBottomOf="@id/etPatientData"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="16dp"/>
+        app:layout_constraintBottom_toTopOf="@id/btnAddPhoto"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintVertical_weight="2"/>
 
     <!-- Кнопка Добавить фото -->
     <Button

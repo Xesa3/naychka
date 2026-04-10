@@ -3,6 +3,7 @@ package com.example.healthapp;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -12,12 +13,14 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
 
 import com.example.healthapp.Pacients.PatientCardsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button buttonCamera, buttonCards, buttonGalerry, buttonSettings;
+    private View bottomNav;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -40,13 +43,29 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        Log.d("TEST", "onCreateView called");
 
 
         buttonCamera = findViewById(R.id.btcCamera);
         buttonCards = findViewById(R.id.btnCrds);
         buttonGalerry = findViewById(R.id.btnEditGallery);
         buttonSettings = findViewById(R.id.btnSettings);
+        bottomNav = findViewById(R.id.bottomNav);
+
+        getSupportFragmentManager().addOnBackStackChangedListener(() -> {
+
+            Fragment current =
+                    getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
+
+            boolean hideNav =
+                    current instanceof Camera
+                            || current instanceof PhotoFilter
+                            || current instanceof fragment_attach_photo
+                            || current instanceof EditFromGallery
+                            || current instanceof UVlampFragment;
+
+            bottomNav.setVisibility(hideNav ? View.GONE : View.VISIBLE);
+        });
 
         buttonCamera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,8 +98,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openCameraFragment(){
+        bottomNav.setVisibility(View.GONE);
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.main, new Camera())
+                .replace(R.id.fragmentContainerView, new Camera())
                 .addToBackStack(null)
                 .commit();
     }
@@ -93,8 +113,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void OpenEditGalleryFragment(){
+        bottomNav.setVisibility(View.GONE);
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.main, new EditFromGallery())
+                .replace(R.id.fragmentContainerView, new EditFromGallery())
                 .addToBackStack(null)
                 .commit();
 

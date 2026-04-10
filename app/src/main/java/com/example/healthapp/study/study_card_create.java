@@ -63,7 +63,7 @@ public class study_card_create extends Fragment {
             String lable = title.getText().toString();
 
             // Генерация id нового исследования
-            int newId = patient.getStudy().size() + 1;
+            int newId = patient.getStudies().size() + 1;
 
             Study newStudy = new Study(
                     newId,

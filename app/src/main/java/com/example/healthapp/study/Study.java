@@ -1,6 +1,8 @@
 package com.example.healthapp.study;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Study implements Serializable {
 
@@ -8,7 +10,7 @@ public class Study implements Serializable {
     private String title;
     private String fullText;
     private String date;
-    private String photoUri;
+    private List<String> photoUris = new ArrayList<>();
 
 
     public Study(int id, String title, String fullText, String date, String photoUri) {
@@ -16,24 +18,33 @@ public class Study implements Serializable {
         this.title = title;
         this.fullText = fullText;
         this.date = date;
-        this.photoUri = photoUri;
+        this.photoUris = new ArrayList<>();  // создаём пустой список
+        if (photoUri != null && !photoUri.isEmpty()) {
+            this.photoUris.add(photoUri);   // добавляем строку в список
+        }
     }
 
     // Геттеры и сеттеры
     public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
-
     public String getTitle() { return title; }
-    public void setTitle(String title) { this.title = title; }
-
     public String getFullText() { return fullText; }
-    public void setFullText(String fullText) { this.fullText = fullText; }
-
     public String getDate() { return date; }
-    public void setDate(String date) { this.date = date; }
+    public List<String> getPhotoUri() { return photoUris; }
 
-    public String getPhotoUri() { return photoUri; }
-    public void setPhotoUri(String photoUri) { this.photoUri = photoUri; }
 
+    public void setId(int id) { this.id = id; }
+    public void setTitle(String title) { this.title = title; }
+    public void setFullText(String fullText) { this.fullText = fullText; }
+    public void setDate(String date) { this.date = date;}
+
+    // ---------- фото ----------
+
+    public void addPhoto(String uri){
+        photoUris.add(uri);
+    }
+
+    public void removePhoto(String uri){
+        photoUris.remove(uri);
+    }
 
 }

@@ -24,7 +24,7 @@ public class Patient implements Serializable {
         this.sureName = sureName;
         this.secondName = secondName;
         this.male = male;
-
+        this.studies = new ArrayList<>();
     }
 
     public Patient(String foolName, String age, String createdAt){
@@ -36,17 +36,20 @@ public class Patient implements Serializable {
     }
 
     public void addStudy(Study study) {
+        if(studies == null) studies = new ArrayList<>();
         studies.add(study);
     }
 
 
-    public void setStudy(List<Study> studies) {
+    public void setStudies(List<Study> studies) {
         this.studies = studies;
     }
 
-    public List<Study> getStudy(){
+    public List<Study> getStudies(){
         return studies;
     }
+
+
     public String getName() {return name;}
     public String getSureName() {return sureName;}
     public String getSecondName() {return secondName;}
@@ -54,9 +57,5 @@ public class Patient implements Serializable {
     public String getFoolName() {return foolName;}
     public String getAge() {return age;}
     public boolean getMale() {return male;}
-
-
-
-
 
 }

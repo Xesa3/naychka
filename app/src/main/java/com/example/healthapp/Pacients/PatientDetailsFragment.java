@@ -28,72 +28,129 @@ import java.util.List;
 
 
 public class PatientDetailsFragment extends Fragment {
-
-    private String name, age;
     private Patient patient; // объект пациента
-    private Button backButton, addstudypat;
     private SharedViewModel viewModel;
     private StudyAdapter studyAdapter;
     private RecyclerView recyclerView;
+    private Button backButton, addstudypat;
+    private TextView tvName,tvAge;
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_patient_details, container, false);
 
+
+        getPatientFromArgs();
+
+        bindViews(view);
+
+        setupViewModel();
+
+        setupRecyclerView();
+
+        setupClicks();
+
+        observeStudies();
+
+        setupUI();
+
+
+        return view;
+    }
+
+
+    private void getPatientFromArgs() {
+
         if (getArguments() != null) {
             patient = (Patient) getArguments().getSerializable("patient");
         }
-        List<Study> studies = patient.getStudy();
 
-        TextView tvName = view.findViewById(R.id.tvNameStudy);
-        TextView tvAge = view.findViewById(R.id.tvAge);
+        if (patient == null) {
+            throw new IllegalStateException("PatientDetailsFragment requires patient argument");
+        }
+
+    }
+
+    private void bindViews(View view) {
+        tvName = view.findViewById(R.id.tvNameStudy);
+        tvAge = view.findViewById(R.id.tvAge);
         addstudypat = view.findViewById(R.id.btnAddStudy);
         recyclerView = view.findViewById(R.id.rvStudies);
+        backButton = view.findViewById(R.id.btnBackToPatientDetails);
+    }
 
-        viewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
-        viewModel.setStudyList(patient.getStudy());
-
-
+    private void setupUI(){
         tvName.setText(patient.getFoolName());
-        tvAge.setText(getContext().getString(R.string.field_birthdate,patient.getAge()));
+        tvAge.setText(
+                getContext().getString(
+                        R.string.field_birthdate,
+                        patient.getAge()
+                )
+        );
+    }
 
-        studyAdapter = new StudyAdapter(patient.getStudy(), study -> {
+    private void setupViewModel(){
+        viewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+        viewModel.setStudyList(patient.getStudies());
+    }
 
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("study", study);
+    private void setupRecyclerView(){
 
-            studyDetails fragment = new studyDetails();
-            fragment.setArguments(bundle);
+        studyAdapter = new StudyAdapter(new ArrayList<>(), study -> openStudy(study));
 
-            requireActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragmentContainerView,fragment)
-                    .addToBackStack(null)
-                    .commit();
-
-        });
-        recyclerView.setAdapter(studyAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        addstudypat.setOnClickListener(v -> {
+        recyclerView.setAdapter(studyAdapter);
 
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("patient", patient);
+        attachDragAndDrop();
+    }
 
-            study_card_create fragment = new study_card_create();
-            fragment.setArguments(bundle);
+    private void openStudy(Study study){
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("study", study);
 
-            // Переход на второй фрагмент
-            getParentFragmentManager().beginTransaction()
-                    .replace(R.id.fragmentContainerView, fragment)
-                    .addToBackStack(null) // чтобы можно было вернуться назад
-                    .commit();
-        });;
-        viewModel.getStudyList().observe(getViewLifecycleOwner(), study->{
-            studyAdapter.updateList(study);
+        studyDetails fragment = new studyDetails();
+        fragment.setArguments(bundle);
+
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragmentContainerView,fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    private void setupClicks(){
+        addstudypat.setOnClickListener(v -> openCreateStudy());;
+
+        backButton.setOnClickListener(v->{
+            getParentFragmentManager().popBackStack();
         });
+    }
 
+    private void openCreateStudy(){
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("patient", patient);
+
+        study_card_create fragment = new study_card_create();
+        fragment.setArguments(bundle);
+
+        // Переход на второй фрагмент
+        getParentFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainerView, fragment)
+                .addToBackStack(null) // чтобы можно было вернуться назад
+                .commit();
+    }
+
+    private void observeStudies(){
+        viewModel.getStudyList().observe(getViewLifecycleOwner(), studies->{
+            studyAdapter.updateList(studies);
+            patient.setStudies(studies);
+        });
+    }
+
+    private void attachDragAndDrop(){
         ItemTouchHelper.Callback callback = new ItemTouchHelper.SimpleCallback(
                 ItemTouchHelper.UP | ItemTouchHelper.DOWN,
                 0
@@ -115,11 +172,9 @@ public class PatientDetailsFragment extends Fragment {
                 super.clearView(recyclerView, viewHolder);
 
                 // 1. Обновляем LiveData
-                List<Study> newOrder = new ArrayList<>(studyAdapter.studies);
+                List<Study> newOrder = new ArrayList<>(studyAdapter.getStudies());
                 viewModel.setStudyList(newOrder);
 
-                // 2. ОБНОВЛЯЕМ ПАЦИЕНТА (важно!)
-                patient.setStudy(newOrder);
             }
 
             @Override
@@ -139,15 +194,6 @@ public class PatientDetailsFragment extends Fragment {
             }
         };
         new ItemTouchHelper(callback).attachToRecyclerView(recyclerView);
-        studyAdapter.setOnStudyMoveListener(((from, to) -> viewModel.moveStudy(from,to)));
-
-
-        backButton = view.findViewById(R.id.btnBackToPatientDetails);
-        backButton.setOnClickListener(v->{
-            getParentFragmentManager().popBackStack();
-        });
-
-
-        return view;
     }
+
 }

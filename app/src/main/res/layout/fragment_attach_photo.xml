@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootAttach"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/white"
+    >
+
+    <!-- Заголовок -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Прикрепление фото"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:paddingBottom="12dp" />
+
+    <!-- Превью фото -->
+    <ImageView
+        android:id="@+id/imagePreview"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="Preview"
+        android:background="#111111"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Выбор пациента -->
+    <TextView
+        android:id="@+id/tvPatient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Пациент"
+        android:textStyle="bold"
+        android:layout_marginTop="4dp" />
+
+    <AutoCompleteTextView
+        android:id="@+id/actvPatients"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:hint="Выберите пациента"
+        android:inputType="text"/>
+
+    <!-- Выбор исследования -->
+    <TextView
+        android:id="@+id/tvStudy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Исследование"
+        android:textStyle="bold"
+        android:layout_marginTop="4dp"
+        />
+
+    <Spinner
+        android:id="@+id/spStudies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:hint="Выберите исследование"/>
+
+    <!-- Кнопки -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="#5CBDD3"
+            android:text="Отмена" />
+
+        <Space
+            android:layout_width="12dp"
+            android:layout_height="1dp" />
+
+        <Button
+            android:id="@+id/btnAttach"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="#4CAF50"
+            android:text="Прикрепить" />
+    </LinearLayout>
+
+    <!-- Подсказка -->
+    <TextView
+        android:id="@+id/tvHint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Выберите пациента и исследование, затем нажмите «Прикрепить»."
+        android:alpha="0.7"
+        android:paddingTop="10dp" />
+
+</LinearLayout>

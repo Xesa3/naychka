@@ -6,7 +6,10 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +18,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.healthapp.PhotoAdapter;
 import com.example.healthapp.R;
 import com.example.healthapp.SharedViewModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class studyDetails extends Fragment {
@@ -26,14 +33,14 @@ public class studyDetails extends Fragment {
     private EditText textStudy;
     private Button btnBack;
     private SharedViewModel viewModel;
-    private ImageView imageView;
+    private RecyclerView rvPhotos;
     private Uri uri;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
+        Log.d("TEST", "onCreateView called");
         View view = inflater.inflate(R.layout.fragment_study_details, container, false);
 
         if(getArguments() != null){
@@ -43,12 +50,20 @@ public class studyDetails extends Fragment {
         nameStudy = view.findViewById(R.id.tvNameStudy);
         createdAt = view.findViewById(R.id.tvDate);
         textStudy = view.findViewById(R.id.etPatientData);
-        imageView = view.findViewById(R.id.imagePatient);
+        rvPhotos = view.findViewById(R.id.rvPhotos);
 
-        if(study.getPhotoUri() != null){
-            uri = Uri.parse(study.getPhotoUri());
-            imageView.setImageURI(uri);
-        }
+        //Подключаем список фото
+
+        List<String> photos = study.getPhotoUri();
+        if(photos == null) photos = new ArrayList<>();
+        rvPhotos.setLayoutManager(
+                new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL, false)
+        );
+
+        PhotoAdapter adapter = new PhotoAdapter(photos);
+        rvPhotos.setAdapter(adapter);
+
+
         nameStudy.setText(study.getTitle());
         createdAt.setText(getContext().getString(R.string.field_dateResearch,study.getDate()));
         textStudy.setText(study.getFullText());

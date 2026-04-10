@@ -49,44 +49,54 @@ public class SharedViewModel extends ViewModel {
         studyList.setValue(new ArrayList<>(list));
     }
 
-    // Перемещение пациента (drag & drop)
-    public void movePatient(int fromPosition, int toPosition) {
-        List<Patient> current = new ArrayList<>(patientList.getValue());
-        if (fromPosition < 0 || toPosition < 0 || fromPosition >= current.size() || toPosition >= current.size()) return;
 
-        Patient moved = current.remove(fromPosition);
-        current.add(toPosition, moved);
-
-        patientList.setValue(current);
-    }
-
-    public void moveStudy(int fromPosition, int toPosition) {
-        List<Study> current = new ArrayList<>(studyList.getValue());
-        if (fromPosition < 0 || toPosition < 0 || fromPosition >= current.size() || toPosition >= current.size()) return;
-
-        Study moved = current.remove(fromPosition);
-        current.add(toPosition,moved);
-
-        studyList.setValue(current);
-    }
     public void initTestDataPatient() {
         if (patientList.getValue() == null || patientList.getValue().isEmpty()) {
             List<Patient> testPatients = new ArrayList<>();
-            Patient p1 = new Patient("Иван Иванов Ивнович", "25",  "01.01.2025");
+            Patient p1 = new Patient("Георгий Иванов Ивнович", "02.05.1999",  "01.01.2025");
 
-            p1.addStudy(new Study(1, "Дерматит", "Покраснения и жжение", "27.12.2025", null));
+            p1.addStudy(new Study(1, "Псориаз", "(Комментарии врача)", "16.07.2025", null));
 
             testPatients.add(p1);
-            testPatients.add(new Patient("Иван Менделеев Ивнович", "21",  "01.01.2025"));
-            testPatients.add(new Patient("Мария Петрова Алексеевна", "30", "02.02.2025"));
-            testPatients.add(new Patient("Сергей Сидоров Анатольевич", "40", "03.03.2025"));
-            testPatients.add(new Patient("Анна Смирнова Кирилловна", "28", "04.04.2025"));
+            testPatients.add(new Patient("Иван Менделеев Ивнович", "12.08.2004",  "01.01.2025"));
+            testPatients.add(new Patient("Мария Петрова Алексеевна", "13.08.2000", "02.02.2025"));
+            testPatients.add(new Patient("Сергей Сидоров Анатольевич", "17.07.1980", "03.03.2025"));
+            testPatients.add(new Patient("Анна Смирнова Кирилловна", "24.02.1999", "04.04.2025"));
 
             patientList.setValue(testPatients);
         }
     }
+    private final MutableLiveData<Integer> selectedPatientIndex = new MutableLiveData<>(-1);
+    public void setSelectedPatientIndex(int index) { selectedPatientIndex.setValue(index); }
+    public Integer getSelectedPatientIndex() { return selectedPatientIndex.getValue(); }
 
+    public void attachPhotoToStudy(int patientIndex, int studyId, String photoPath) {
+        List<Patient> list = patientList.getValue();
+        if (list == null) return;
+        if (patientIndex < 0 || patientIndex >= list.size()) return;
 
+        Patient p = list.get(patientIndex);
+        List<Study> studies = p.getStudies(); // у тебя именно getStudy()
+        if (studies == null) return;
 
+        for (Study s : studies) {
+            if (s.getId() == studyId) {
+                s.addPhoto(photoPath);
+                patientList.setValue(new ArrayList<>(list)); // “пнуть” обновление UI
+                return;
+            }
+        }
+    }
+
+    public void deletePatient(Patient patient){
+        List<Patient> list = patientList.getValue();
+        if(list == null) return;
+
+        list.remove(patient);
+
+        // важно: новый список, чтобы LiveData обновился
+        patientList.setValue(new ArrayList<>(list));
+
+    }
 
 }

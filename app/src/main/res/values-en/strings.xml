@@ -21,7 +21,7 @@
     <string name = "doPicture">Take a photo</string>
     <string name = "filterCheck">Filter</string>
     <string name = "filterSelect">Select a filter</string>
-
+    <string name = "fotoSelect">Select a photo to process</string>
 
 
     <string name="additional_info_title">Additional information</string>
@@ -51,5 +51,9 @@
 
     <string name="field_name_Research">Enter the title of the study</string>
     <string name="field_data_patient">Enter patient information</string>
+
+    <string name="delete_patient">Delete</string>
+    <string name="delete_patient2">The patient has been removed.</string>
+    <string name="delete_patient3">Cancel?</string>
 
 </resources>

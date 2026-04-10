@@ -8,17 +8,21 @@
     tools:context=".SettingsFragment">
 
     <!-- Верхняя карточка с именем и датой -->
+
+    <!-- Кнопка "Назад" -->
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/rounded_bg"
         android:orientation="vertical"
         android:padding="12dp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnBackToPatientDetails"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/tvNameStudy"
@@ -34,27 +38,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Дата: 12.05.1985"
+            android:text="Дата рождения: 12.05.1985"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold" />
 
     </LinearLayout>
 
-    <!-- Кнопка "Назад" -->
     <Button
         android:id="@+id/btnBackToPatientDetails"
         android:layout_width="wrap_content"
-        android:layout_height="51dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="8dp"
         android:backgroundTint="#5CBDD3"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center_vertical"
         android:text="@string/btn_back"
         android:textColor="@color/white"
         android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout3"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="16dp"/>
+        app:layout_constraintTop_toTopOf="@id/linearLayout3"
+        app:layout_constraintBottom_toBottomOf="@id/linearLayout3"/>
 
     <!-- Кнопка "Добавить Исследование" -->
     <Button
@@ -70,7 +74,7 @@
         android:text="@string/btnAddResearch"
         android:textColor="@color/white"
         android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/btnBackToPatientDetails"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -79,12 +83,14 @@
         android:id="@+id/rvStudies"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:paddingTop="5dp"
         android:clipToPadding="false"
-        android:padding="8dp"
-        app:layout_constraintTop_toBottomOf="@id/btnAddStudy"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnAddStudy"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

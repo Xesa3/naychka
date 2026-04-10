@@ -14,6 +14,20 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        externalNativeBuild {
+            cmake {
+                cppFlags += ""
+            }
+        }
+        ndk {
+
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path = file("src/main/cpp/CMakeLists.txt")
+        }
     }
 
     buildTypes {
@@ -41,6 +55,7 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
+    implementation ("androidx.recyclerview:recyclerview:1.3.2")
     implementation("com.github.chrisbanes:PhotoView:2.3.0")
     implementation ("com.google.android.material:material:1.12.0")
     implementation("androidx.camera:camera-core:1.3.2")
